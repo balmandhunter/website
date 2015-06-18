@@ -29,6 +29,11 @@ p {
     margin-top: 0px;
 }
 
+.max_width {
+height: auto;
+max-width: 75%;
+}
+
 hr.big {
 	border-color: #f05f40;
 }
