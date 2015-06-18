@@ -23,6 +23,12 @@ p {
     color: rgba(255,255,255,.7);
 }
 
+p.it {
+    font-style: italic;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
 hr.big {
 	border-color: #f05f40;
 }
