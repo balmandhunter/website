@@ -9,6 +9,12 @@ h2{
 
 }
 
+a.neutral {
+    margin-bottom: 20px;
+    font-size: 18px;
+    line-height: 1.5;
+    color: rgba(255,255,255,.7);
+}
 
 p {
     margin-bottom: 20px;
