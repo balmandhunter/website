@@ -123,10 +123,16 @@
                         </p>
                         <img src="img/data4.png" class="img-responsive center-block space max_width" alt=""> 
                         <p>
-                            To reduce the model's underprediction at high values, I transformed the base features (ozone sensor signal, temperature and humidity) to create 321 new features. The plot above shows a linear regression with all 324 features. Adding the new features to the regression reduced the magnitude of the underprediction from at high values from 15% to 6% while maintaining a RMSE of 5. However, it is always best to use the simplest model possible, so the next thing I did was select the most important features in the model. 
+                            To reduce the model's underprediction at high values, I transformed the base features (ozone sensor signal, temperature and humidity) to create 321 new features. The plot above shows a linear regression with all 324 features. Adding the new features to the regression reduced the magnitude of the underprediction from at high values from 15% to 6% while maintaining a RMSE of 5. 
                         </p>
+                       
                         <img src="img/data1.png" class="img-responsive center-block space max_width" alt=""> 
+                        <p>
+                        It is always best to use the simplest model possible, so the next thing I did was select the most important features in the model. I used forward selection, and wrote an algorithm to choose each feature based on minimizing a custom error function. The custom function is a sum of the RMSE at high and low ozone values, with errors at high values weighted ten times as much as those at low values. The plot above shows how the custom error and RMSE change as each next-best feature is added to the regression. Based on the plot above, I would probably select between 9 and 15 features for my model, but I also looked at learning curves to evaluate when adding features starts to lead to overfitting. 
+                        </p>
+
                         <img src="img/data2.png" class="img-responsive center-block space max_width" alt=""> 
+
                     </div>
 
 
