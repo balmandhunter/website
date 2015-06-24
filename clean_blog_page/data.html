@@ -110,6 +110,28 @@
 
                     <hr class = "big">
                      
+                    <div class="post-preview">                            
+                        <h2> Personal Work - Regression Modeling for Sensor Calibration
+                        </h2> 
+
+                        <p>
+                            I have always valued explanatory data visualization, but the importance of exploratory data visualization has become more apparent to me as I have worked on improving the regression models we use for sensor calibrations. Check out my ipython notebook on <a class = "neutral" href="https://github.com/balmandhunter/Regressions_machine_learning/blob/master/CAMP_calibrations.ipynb">GitHub</a> to see all of the visualizations I used to guide my regression modeling decisions.
+                        </p>
+                        <img src="img/data3.png" class="img-responsive center-block space max_width" alt="">
+                        <p>
+                            The plot above is a comparison between the ozone values predicted by a linear regression model, using the data from the low-cost sensors, and the ozone values measured by a reference instrument. The root-mean-square error (RMSE) for this regression is 5 ppb, which means that there is a 5 ppb difference between the reference ozone concentration measurements and the model predictions. This RMSE is very good, especially when you consider the fact that we're comparing the performance of a $10 sensor to a $10,000+ reference instrument. However, when we look at this plot, we can see that at high ozone values, the model always underpredicts ozone (15% underprediction when concentration > 60 ppb and 20% underprediction when concentration > 70 ppb). Since exposure to high ozone concentrations can negatively impact health, researchers are most concerned about these high ozone values. Without plotting this data, one could conclude that this model is a great fit, but this plot instantly makes it clear that it does not work well at high values.
+                        </p>
+                        <img src="img/data4.png" class="img-responsive center-block space max_width" alt=""> 
+                        <p>
+                            To reduce the model's underprediction at high values, I transformed the base features (ozone sensor signal, temperature and humidity) to create 321 new features. The plot above shows a linear regression with all 324 features. Adding the new features to the regression reduced the magnitude of the underprediction from at high values from 15% to 6% while maintaining a RMSE of 5. However, it is always best to use the simplest model possible, so the next thing I did was select the most important features in the model. 
+                        </p>
+                        <img src="img/data1.png" class="img-responsive center-block space max_width" alt=""> 
+                        <img src="img/data2.png" class="img-responsive center-block space max_width" alt=""> 
+                    </div>
+
+
+                    <hr class = "big">
+                     
                     <div class="post-preview">
                         <a href="http://www.bbc.co.uk/programmes/p00cgkfk">
                             
@@ -168,7 +190,7 @@
                             <p>
                             Nate Silver made statistics cool during the 2008 elections. What more needs to be said?
                             </p> 
-                            <img src="img/flights.jpg" class="img-responsive center-block" alt="">   
+                            <img src="img/flights.jpg" class="img-responsive center-block max_width" alt="">   
                             <p>
                             "FiveThirtyEight analyzed 6 million flights to figure out which airports, airlines and routes are most likely to get you there on time and which ones will leave you waiting..."
                             [click to continue reading]
