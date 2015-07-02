@@ -177,12 +177,12 @@
                         <p>
                         The histograms above show how well the distribution of the predicted data matches the reference data. 
                         </p>
-                        
+
                         <img src="img/data7.png" class="img-responsive center-block space max_width" alt=""> 
                         <img src="img/data8.png" class="img-responsive center-block space max_width" alt=""> 
 
                         <p>
-                        Another method for reducing variance is to reduce the number of features in a model (and/or the magnitude of their coefficients) using a shrinkage penalty. The plots above are visualizations that aid in the selection of the shrinkage parameter, lambda, for the <a class = "neutral" href="http://statweb.stanford.edu/~tibs/lasso/lasso.pdf">lasso</a> reduction method. The higher the value of lambda, the larger the penalty placed on high coefficient values. The top plot visualizes how the coefficients change as lambda is increased, and the bottom plot shows how the custom error function I defined varies with lambda. The optimal lambda value is the one that results in the lowest error. 
+                        Another method for reducing variance is to reduce the number of features in a model (and/or the magnitude of their coefficients) using a shrinkage penalty. The plots above are visualizations that aid in the selection of the shrinkage parameter, lambda, for the <a class = "neutral" href="http://statweb.stanford.edu/~tibs/lasso/lasso.pdf">lasso</a> reduction method. The higher the value of lambda, the larger the penalty placed on high coefficient values. The top plot visualizes how the coefficients change as lambda is increased, and the bottom plot shows how the custom error function I defined varies with lambda. The optimal lambda value is the one that results in the lowest error. The overall cross-validation RMSE for the Lasso model is 5&thinsp;ppb, the high-value RMSE is 6&thinsp;ppb, and the difference in high-value medians is -3.7&thinsp;ppb. While these statistics are significantly better than the base model, they are not as good as the forward selection results.
                         </p>
 
                     </div>
