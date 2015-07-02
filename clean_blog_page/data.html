@@ -119,16 +119,42 @@
                         </p>
                         <img src="img/data3.png" class="img-responsive center-block space max_width" alt="">
                         <p>
-                            The plot above is a comparison between the ozone values predicted by a linear regression model, using the data from the low-cost sensors, and the ozone values measured by a reference instrument. The root-mean-square error (RMSE) for this regression is 6&thinsp;ppb, which means that the mean difference  between the reference ozone concentration measurements and the model predictions is 6&thinsp;ppb  This RMSE is very good, especially when you consider the fact that we're comparing the performance of a $10 sensor to a $10,000+ reference instrument. However, when we look at this plot, we can see that at high ozone values, the model underpredicts ozone (15&thinsp;% underprediction when concentration > 60&thinsp;ppb and 22&thinsp;% underprediction when concentration > 70&thinsp;ppb). Since exposure to high ozone concentrations can negatively impact health, researchers are most concerned about these high ozone values. Without plotting this data, one could conclude that this model is a great fit, but this plot instantly makes it clear that it does not work well at high values.
+                            The plot above is a comparison between the ozone values predicted by a linear regression model, using the data from the low-cost sensors, and the ozone values measured by a reference instrument. The root-mean-square error (RMSE) for this model is 6&thinsp;ppb, which means that the mean difference  between the reference ozone concentration measurements and the model predictions is 6&thinsp;ppb.  This RMSE is very good, especially when you consider the fact that we're comparing the performance of a $10 sensor to a $10,000+ reference instrument. However, when we look at this plot, we can see that at high ozone values (>&thinsp;60&thinsp;ppb), the model underpredicts ozone by an average of 10.4 ppb, with an RMSE of 11&thinsp;ppb. Since exposure to high ozone concentrations can negatively impact health, researchers are most concerned about these high ozone values, and it is critical to measure them accurately. Without plotting this data, one could conclude that this model is a great fit, but this plot instantly makes it clear that it does not work well at high values.
                         </p>
+
+                        <img src="img/data10.png" class="img-responsive center-block space max_width" alt="">
+                        <img src="img/data9.png" class="img-responsive center-block space max_width" alt="">
+                        <p>
+                            You can observe the distribution of the predicted and reference data above. The blue lines represent how the data would look if it were perfectly normally distributed, and looking at the actual data distribution in the bins shows us that the data is close to normally distributed. The top plot represents the distribution of the reference data. There is an abrupt cutoff at a concentration of zero, since ozone concentration cannot be less than zero. Notice that when the ozone concentration is above 50&thinsp;ppb, the bins match the normal distribution very closely. 
+                            The ozone concentration predictions in bottom plot, on the other hand, abruptly drop off around 60&thinsp;ppb, and there are no predicted concentrations above 65&thinsp;ppb. 
+                        </p>
+
                         <img src="img/data4.png" class="img-responsive center-block space max_width" alt=""> 
                         <p>
-                            To reduce the model's underprediction at high values, I transformed the base features (ozone sensor signal, temperature and humidity) to create 321 new features. The plot above shows a linear regression with all 324 features. Adding the new features to the regression reduced the magnitude of the underprediction from at high values to 5&thinsp;% and 7&thinsp;% (when reference ozone concentration > 60&thinsp;ppb and 70&thinsp;ppb, respectively). As expected when adding a large number of features, the variance increased, and the RMSE increased from 6&thinsp;ppb to 7&thinsp;ppb. 
+                            To reduce the model's underprediction at high values, I transformed the base features (ozone sensor signal, temperature and humidity) to create 321 new features. The plot above shows a linear regression with all 324 features. Adding the new features to the regression reduced the magnitude of the underprediction from at high values to 2.6&thinsp;ppb, and the high-ozone RMSE decreased slightly to 10&thinsp;ppb. As expected when adding a large number of features, the variance increased, and the overall RMSE increased from 6&thinsp;ppb to 7&thinsp;ppb. 
                         </p>
+
+                        <img src="img/data12.png" class="img-responsive center-block space max_width" alt="">
+                        <img src="img/data11.png" class="img-responsive center-block space max_width" alt="">
                        
-                        <img src="img/data1.png" class="img-responsive center-block space max_width" alt=""> 
                         <p>
-                        Reducing the number of features in a model is one way to reduce variance, and it is always best to use the simplest model that produces good results, so the next thing I did was select the most important features. I used forward selection, and wrote an algorithm to choose each feature based on minimizing a custom error function. The custom function is a sum of the RMSE at high and low ozone values, with errors at high values weighted ten times as much as those at low values. The plot above shows how the custom error and RMSE change as each next-best feature is added to the regression. Based on the plot above, I would probably select between 5 and 9 features for my model, but I also looked at learning curves to evaluate when adding features starts to lead to overfitting. 
+                            The histograms for the linear model with the new features show much better predictions at high values. I removed the normal distribution lines from these plots to improve the visilibility of the ozone concentrations. While these histograms look good, they are based on a model with all 324 features. Since it is always best to use the simplest model that produces good results, the next step is to try to simplify the model. Reducing the number of features in a model is also one way to reduce variance in the model. 
+                        </p>
+
+
+
+                        <p>
+                        I used forward selection to reduce the number of features in the model. I wrote an algorithm that chooses each feature based on minimizing a custom error function. The custom function is:
+                        <br><br>
+                        <img src="img/data15.png" class="img-responsive center-block space max_width" alt=""> 
+
+                        <p>
+                        where C<sub>m,r</sub> is the median of the reference ozone data for high ozone concentrations <br>(>&thinsp;60&thinsp;ppb), C<sub>m,p</sub> is the median of the predicted ozone data for high reference ozone values, MSE<sub>h</sub> is the MSE at high ozone values, and MSE<sub>l</sub> is the MSE at low ozone values. 
+                        </p>
+                        <img src="img/data1.png" class="img-responsive center-block space max_width" alt=""> 
+                        <img src="img/data13.png" class="img-responsive center-block space max_width" alt=""> 
+                        <p>
+                         The plots above show how the custom error and RMSE change as each next-best feature is added to the regression. The top plot shows the 100 best features, and the bottom plot is zoomed in on the area in the red circle. Based on this data, I will likely select between 33 and 37 features for the model, since both the custom score and overall RMSE are low in this region. In addition to looking at the plots above, I looked at learning curves to evaluate when adding features starts to lead to overfitting. 
                         </p>
 
                         <img src="img/data5.png" class="img-responsive center-block space max_width" alt=""> 
