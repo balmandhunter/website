@@ -119,7 +119,7 @@
                         </p>
                         <img src="img/data3.png" class="img-responsive center-block space max_width" alt="">
                         <p>
-                            The plot above is a comparison between the ozone values predicted by a linear regression model, using the data from the low-cost sensors, and the ozone values measured by a reference instrument. The root-mean-square error (RMSE) for this model is 6&thinsp;ppb, which means that the mean difference  between the reference ozone concentration measurements and the model predictions is 6&thinsp;ppb.  This RMSE is very good, especially when you consider the fact that we're comparing the performance of a $10 sensor to a $10,000+ reference instrument. However, when we look at this plot, we can see that at high ozone values (>&thinsp;60&thinsp;ppb), the model underpredicts ozone by an average of 10.4 ppb, with an RMSE of 11&thinsp;ppb. Since exposure to high ozone concentrations can negatively impact health, researchers are most concerned about these high ozone values, and it is critical to measure them accurately. Without plotting this data, one could conclude that this model is a great fit, but this plot instantly makes it clear that it does not work well at high values.
+                            The plot above is a comparison between the ozone values predicted by a linear regression model, using the data from the low-cost sensors, and the ozone values measured by a reference instrument. The cross-validation root-mean-square error (RMSE) for this model is 6&thinsp;ppb, which means that the mean difference  between the reference ozone concentration measurements and the model predictions is 6&thinsp;ppb.  This RMSE is very good, especially when you consider the fact that we're comparing the performance of a $10 sensor to a $10,000+ reference instrument. However, when we look at this plot, we can see that at high ozone values (>&thinsp;60&thinsp;ppb), the model underpredicts ozone by an average of 10.4 ppb, with an RMSE of 11&thinsp;ppb. Since exposure to high ozone concentrations can negatively impact health, researchers are most concerned about these high ozone values, and it is critical to measure them accurately. Without plotting this data, one could conclude that this model is a great fit, but this plot instantly makes it clear that it does not work well at high values.
                         </p>
 
                         <img src="img/data10.png" class="img-responsive center-block space max_width" alt="">
@@ -131,7 +131,7 @@
 
                         <img src="img/data4.png" class="img-responsive center-block space max_width" alt=""> 
                         <p>
-                            To reduce the model's underprediction at high values, I transformed the base features (ozone sensor signal, temperature and humidity) to create 321 new features. The plot above shows a linear regression with all 324 features. Adding the new features to the regression reduced the magnitude of the underprediction from at high values to 2.6&thinsp;ppb, and the high-ozone RMSE decreased slightly to 10&thinsp;ppb. As expected when adding a large number of features, the variance increased, and the overall RMSE increased from 6&thinsp;ppb to 7&thinsp;ppb. 
+                            To reduce the model's underprediction at high values, I transformed the base features (ozone sensor signal, temperature and humidity) to create 321 new features. The plot above shows a linear regression with all 324 features. Adding the new features to the regression reduced the magnitude of the underprediction from at high values to 2.6&thinsp;ppb, and the high-ozone cross-validation RMSE decreased slightly to 10&thinsp;ppb. As expected when adding a large number of features, the variance increased, and the overall RMSE increased from 6&thinsp;ppb to 7&thinsp;ppb. 
                         </p>
 
                         <img src="img/data12.png" class="img-responsive center-block space max_width" alt="">
@@ -166,6 +166,14 @@
                         <p>
                         I plotted a learning curve for each feature that I added to the model. By looking through the curves, and seeing how they change with each feature, you can tell if and when adding more features leads to overfitting. The learning curve above is for the maximum number of features I'm considering, and the training and cross-validation lines are close together, so the model does not have a variance problem, and including up to 37 features in the model should not lead to overfitting. See my IPython notebook on <a class = "neutral" href="https://github.com/balmandhunter/Regressions_machine_learning/blob/master/CAMP_calibrations.ipynb">GitHub</a> to view the learning curves for the best 100 features. 
                         </p>
+
+                        <img src="img/data16.png" class="img-responsive center-block space max_width" alt=""> 
+                        <p>
+                        Based on the plots discussed above and the statistical results, I decided to use 36 features for my model. The plot above shows a comparison between the ozone values predicted by a the new linear regression model, and the values measured by the reference instrument. The overall cross-validation RMSE is 4&thinsp;ppb, the high-value RMSE is 6&thinsp;ppb,and the difference in high-value medians is -1.9&thinsp;ppb.
+
+                        <img src="img/data12.png" class="img-responsive center-block space max_width" alt="">
+                        <img src="img/data17.png" class="img-responsive center-block space max_width" alt="">
+                        ...text...
 
                         <img src="img/data7.png" class="img-responsive center-block space max_width" alt=""> 
                         <img src="img/data8.png" class="img-responsive center-block space max_width" alt=""> 
