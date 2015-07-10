@@ -1,4 +1,4 @@
-function draw(data) {
+function draw2(data) {
 
   /*D3.js setup code*/
   "use strict";
@@ -6,11 +6,11 @@ function draw(data) {
       width = 600 - margin,
       height = 400 - margin;
 
-  d3.select("#chart_d3")
+   d3.select("#chart2_d3")
     .append("h4")
-    .text("Inexpensive Sensor Signal Versus Time and Temperature");
+    .text("Inexpensive Sensor Signal Versus time and Relative Humidity");
 
-  var svg = d3.select("#chart_d3")
+  var svg = d3.select("#chart2_d3")
     .append("svg")
       .attr("width", width + margin)
       .attr("height", height + margin)
@@ -18,11 +18,10 @@ function draw(data) {
         .attr('class','chart');
 
   /*Dimple.js Chart construction code*/
-  console.log(data)
   var myChart = new dimple.chart(svg, data);
   var x = myChart.addTimeAxis("x", "Date","%x %H:%M", "%m/%d"); 
   myChart.addMeasureAxis("y", "Sensor Ozone Signal (1/uV)");
-  myChart.addColorAxis("Temperature (C)", ["#313695", "#4575b4", "#f46d43","#d73027" , "#a50026"]);
+  myChart.addColorAxis("Relative Humidity (%)", ["#313695", "#4575b4", "#f46d43","#d73027" , "#a50026"]);
   var lines = myChart.addSeries(null, dimple.plot.line); 
   lines.lineWeight = 3;
   lines.lineMarkers = 'dimple-custom-line-marker';
@@ -30,4 +29,4 @@ function draw(data) {
 
 };
 
-d3.csv("/clean_blog_page/js/D0_resamp.csv", draw);
+d3.csv("/clean_blog_page/js/D0_resamp.csv", draw2);

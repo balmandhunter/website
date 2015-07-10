@@ -1,3 +1,15 @@
+#chart_d3 svg {
+    background-color: white;
+}
+
+#chart2_d3 svg {
+    background-color: white;
+}
+
+#chart3_d3 svg {
+    background-color: white;
+}
+
 h1 {
 	color: #333;
 
