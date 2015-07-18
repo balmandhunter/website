@@ -1,7 +1,6 @@
 function draw3(data) {
 
 /*D3.js setup code*/
-
     "use strict";
 
     var margin = 75,
@@ -27,7 +26,6 @@ function draw3(data) {
     var lines = myChart.addSeries(null, dimple.plot.line); 
     lines.lineWeight = 3;
     lines.lineMarkers = 'dimple-custom-line-marker';
-    console.log(myChart.data);
     myChart.draw();
 
 };
