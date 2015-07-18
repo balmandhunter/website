@@ -9,7 +9,7 @@
           text-align: center;
           color: black;
           background-color: none;
-          left: 600px;
+          left: 575px;
           font-size: 36px;
           font-weight: normal;
           font-color: "#bebada";
@@ -156,7 +156,7 @@
 
               var x = d3.scale.linear()
                   .domain([1903, 2015])
-                  .range([margin , width - margin * 3])
+                  .range([margin * 2, width - margin * 5])
                   .clamp(true);
 
               var brush = d3.svg.brush()
@@ -166,7 +166,7 @@
 
               svg.append("g")
                   .attr("class", "x axis")
-                  .attr("transform", "translate(0," + height * 0.9  + ")")
+                  .attr("transform", "translate(0," + height * 0.95  + ")")
                   .call(d3.svg.axis()
                     .scale(x)
                     .orient("bottom")
@@ -190,7 +190,7 @@
 
               var handle = slider.append("rect")
                   .attr("class", "handle")
-                  .attr("transform", "translate(0," + (height * 0.9 - handle_height/2) + ")")
+                  .attr("transform", "translate(0," + (height * 0.95 - handle_height/2) + ")")
                   .attr("width", 12)
                   .attr("height", handle_height);
 
