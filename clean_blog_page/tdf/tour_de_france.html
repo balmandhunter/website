@@ -9,7 +9,7 @@
           text-align: center;
           color: black;
           background-color: none;
-          left: 575px;
+          left: 550px;
           font-size: 36px;
           font-weight: normal;
           font-color: "#bebada";
@@ -57,7 +57,7 @@
           //scale the map
           .scale(225)
           //center the map
-          .translate([width/2.5, height/1.7]);
+          .translate([width/2.5, height/1.8]);
         //create the svg object that will render the pixels constructed above
         var path = d3.geo.path().projection(projection);
 
@@ -166,7 +166,7 @@
 
               svg.append("g")
                   .attr("class", "x axis")
-                  .attr("transform", "translate(0," + height * 0.975  + ")")
+                  .attr("transform", "translate(0," + height * 0.98  + ")")
                   .call(d3.svg.axis()
                     .scale(x)
                     .orient("bottom")
@@ -190,7 +190,7 @@
 
               var handle = slider.append("rect")
                   .attr("class", "handle")
-                  .attr("transform", "translate(0," + (height * 0.975 - handle_height/2) + ")")
+                  .attr("transform", "translate(0," + (height * 0.98 - handle_height/2) + ")")
                   .attr("width", 12)
                   .attr("height", handle_height);
 
