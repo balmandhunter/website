@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <script src="http://d3js.org/d3.v3.min.js"></script>
     <style>
       h2 {
@@ -11,11 +12,23 @@
           background-color: none;
           left: 550px;
           font-size: 36px;
-          font-weight: normal;
+          font-weight: 700;
           font-color: "#bebada";
       }
+
+      h3 {
+          position: fixed;
+          text-align: center;
+          background-color: none;
+          left: 550px;
+          font-size: 20px;
+          font-weight: 400;
+          font-color: "#d9d9d9";
+      }
+
       body {
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-family: 'Lora', 
+        serif;
       }
       .tick text {
         font-size: 20px;
@@ -148,6 +161,9 @@
               //select the title, and add the current year 
               d3.select("h2")
                   .text("Tour de France " + year);
+
+              d3.select("h3")
+                  .text("World Participation by Year")
 
               //get the list of countries for the current year and create an array of strings of the names
               var countries = filtered[0].values['teams'];
