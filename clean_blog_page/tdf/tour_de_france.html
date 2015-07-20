@@ -250,10 +250,10 @@
                   .call(brush.event);
 
               function brushed(d) {
-                var value = brush.extent()[2015];
+                var value = brush.extent()[90];
 
                 if (d3.event.sourceEvent) { // not a programmatic event
-                  value = x.invert(d3.mouse(this)[2015]);
+                  value = x.invert(d3.mouse(this)[90]);
                   brush.extent([value, value]);
                 }
 
