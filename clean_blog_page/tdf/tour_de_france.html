@@ -20,7 +20,7 @@
           position: fixed;
           text-align: center;
           left: 565px;
-          top: 65px;
+          top: 70px;
           font-size: 22px;
           font-weight: 400;    
       }
@@ -214,7 +214,7 @@
 
               svg.append("g")
                   .attr("class", "x axis")
-                  .attr("transform", "translate(0," + height * 0.17  + ")")
+                  .attr("transform", "translate(0," + height * 0.18  + ")")
                   .call(d3.svg.axis()
                     .scale(x)
                     .orient("bottom")
@@ -241,7 +241,7 @@
 
               var handle = slider.append("rect")
                   .attr("class", "handle")
-                  .attr("transform", "translate(0," + (height * 0.17 - handle_height / 2) + ")")
+                  .attr("transform", "translate(0," + (height * 0.18 - handle_height / 2) + ")")
                   .attr("width", 5)
                   .attr("height", handle_height);
 
