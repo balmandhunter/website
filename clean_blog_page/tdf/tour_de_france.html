@@ -99,18 +99,18 @@
         d3.select("body")
           .append("h3")
           .text("Nationalities of Participants by Year")
-          .style("opacity", "0.55");
+          .style('color', '#b3b3b3');
 
         //make reference
         d3.select("body")
           .append("h4")
           .text("Source: Amuary Sport Organization, http://www.letour.fr/HISTO/us/TDF")
+          .style('color', '#b3b3b3');
 
-        //meks graphic description
+        //make description
         d3.select("body")
           .append("p")
-          .text("This dynamic visualization explores the globalization of the Tour de France. Countries highlighted in red and yellow in represent the nationalities of participating and winning riders, respectively.")
-          .attr("fill", "#d9d9d9");
+          .text("This dynamic visualization explores the globalization of the Tour de France. Countries highlighted in red and yellow in represent the nationalities of participating and winning riders, respectively.");
 
         var svg = d3.select("body")
             .append("svg")
@@ -266,6 +266,7 @@
               slider.selectAll(".extent,.resize")
                   .remove();
 
+              //allow user to click anywhere on line to move slider to that spot
               slider.select(".background")
                 .attr("height", height);
 
