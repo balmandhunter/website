@@ -103,9 +103,9 @@
         //given latitude and longitude coordinates, mercator spits back x,y coordinates
         var projection = d3.geo.equirectangular()
           //scale the map
-          .scale(225)
+          .scale(210)
           //center the map
-          .translate([width / 2.5, height / 1.35]);
+          .translate([width / 2.5, height / 1.25]);
         //create the svg object that will render the pixels constructed above
         var path = d3.geo.path().projection(projection);
 
@@ -214,7 +214,7 @@
 
               svg.append("g")
                   .attr("class", "x axis")
-                  .attr("transform", "translate(0," + height * 0.18  + ")")
+                  .attr("transform", "translate(0," + height * 0.19  + ")")
                   .call(d3.svg.axis()
                     .scale(x)
                     .orient("bottom")
@@ -241,7 +241,7 @@
 
               var handle = slider.append("rect")
                   .attr("class", "handle")
-                  .attr("transform", "translate(0," + (height * 0.18 - handle_height / 2) + ")")
+                  .attr("transform", "translate(0," + (height * 0.19 - handle_height / 2) + ")")
                   .attr("width", 5)
                   .attr("height", handle_height);
 
