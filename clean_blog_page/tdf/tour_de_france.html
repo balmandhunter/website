@@ -20,6 +20,35 @@
       .tick text {
         font-size: 20px;
       }
+      .axis {
+        font: 10px sans-serif;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      .axis .domain {
+        fill: none;
+        stroke: #000;
+        stroke-opacity: .3;
+        stroke-width: 10px;
+        stroke-linecap: round;
+      }
+
+      .axis .halo {
+        fill: none;
+        stroke: #d9d9d9;
+        stroke-width: 8px;
+        stroke-linecap: round;
+      }
+
+      .slider .handle {
+        fill: #fff;
+        stroke: #000;
+        stroke-opacity: .5;
+        stroke-width: 1.25px;
+        cursor: crosshair;
+}
     </style>
     <script type="text/javascript">  
       function draw(geo_data) {
@@ -172,9 +201,9 @@
                     .orient("bottom")
                     .tickFormat(d3.format("d"))
                     //weight of bar
-                    .tickSize(2)
+                    .tickSize(0)
                     //space between numbers and bar
-                    .tickPadding(15))
+                    .tickPadding(20))
                 .select(".domain")
                 .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
                   .attr("class", "halo");
@@ -186,12 +215,15 @@
               slider.selectAll(".extent,.resize")
                   .remove();
 
-              var handle_height = 12
+              slider.select(".background")
+                .attr("height", height);
+
+              var handle_height = 24
 
               var handle = slider.append("rect")
                   .attr("class", "handle")
                   .attr("transform", "translate(0," + (height * 0.98 - handle_height/2) + ")")
-                  .attr("width", 12)
+                  .attr("width", 5)
                   .attr("height", handle_height);
 
               //this calls the brush event when the page loads, to get the circle onto the slider
