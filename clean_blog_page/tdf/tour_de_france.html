@@ -12,7 +12,7 @@
           background-color: none;
           left: 550px;
           font-size: 36px;
-          font-weight: 700;
+          font-weight: 400;
           font-color: "#bebada";
       }
 
@@ -30,7 +30,7 @@
         font-family: 'Merriweather Sans', 
         sans-serif;
       }
-      
+
       .tick text {
         font-size: 20px;
       }
@@ -75,6 +75,12 @@
         d3.select("body")
           .append("h2")
           .text("Tour de France");
+
+          
+        //make subtitle
+        d3.select("body")
+          .append("h3")
+          .text("World Participation by Year");
 
         var svg = d3.select("body")
             .append("svg")
@@ -162,9 +168,6 @@
               //select the title, and add the current year 
               d3.select("h2")
                   .text("Tour de France " + year);
-
-              d3.select("h3")
-                  .text("World Participation by Year")
 
               //get the list of countries for the current year and create an array of strings of the names
               var countries = filtered[0].values['teams'];
