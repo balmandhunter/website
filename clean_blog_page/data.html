@@ -122,9 +122,6 @@
                             I've been pretty obsessed with following the Tour de France this July, and I thought it would be fun to use D3 to create an interactive graphic that shows the how participation in the Tour has changed since inaugural event in 1903. I hope you enjoy exploring the graphic as much as I enjoyed developing it!
                             </p> 
                             <img src="img/data18.png" class="img-responsive center-block max_width" alt="">   
-                            <p>
-                            (animation currently only works in Google Chrome)
-                            </p>
                             
                         </a>
                         </div>
@@ -162,21 +159,14 @@
 
                         <img src="img/data4.png" class="img-responsive center-block space max_width" alt=""> 
                         <p>
-                            To reduce the model's underprediction at high values, I transformed the base features (ozone sensor signal, temperature and humidity) to create 321 new features. The plot above shows a linear regression with all 324 features. Adding the new features to the regression reduced the magnitude of the underprediction from at high values to 2.6&thinsp;ppb, and the high-ozone cross-validation RMSE decreased slightly to 10&thinsp;ppb. As expected when adding a large number of features, the variance increased, and the overall RMSE increased from 6&thinsp;ppb to 7&thinsp;ppb. 
+                            To reduce the model's underprediction at high values, I transformed the base features (ozone sensor signal, temperature and humidity) to create 321 new features. The plot above shows a linear regression with all 324 features. Adding the new features to the regression reduced the magnitude of the underprediction from at high values to 2.6&thinsp;ppb, and the high-ozone cross-validation RMSE decreased slightly to 10&thinsp;ppb. As expected when adding a large number of features, the variance increased, and the overall RMSE increased from 6&thinsp;ppb to 7&thinsp;ppb. Since it is always best to use the simplest model that produces good results, the next step is to try to simplify the model. Reducing the number of features in a model is also one way to reduce variance in the model. 
                         </p>
 
-                        <img src="img/data12.png" class="img-responsive center-block space max_width" alt="">
-                        <img src="img/data11.png" class="img-responsive center-block space max_width" alt="">
-                       
                         <p>
-                            The histograms for the linear model with the new features show much better predictions at high values. I removed the normal distribution lines from these plots to improve the visilibility of high ozone concentrations. While these histograms look good, they are based on a model with all 324 features. Since it is always best to use the simplest model that produces good results, the next step is to try to simplify the model. Reducing the number of features in a model is also one way to reduce variance in the model. 
+                            I used forward selection to reduce the number of features in the model. I wrote an algorithm that chooses each feature based on minimizing a custom error function. The custom function is:
+                            <br><br>
                         </p>
-
-
-
-                        <p>
-                        I used forward selection to reduce the number of features in the model. I wrote an algorithm that chooses each feature based on minimizing a custom error function. The custom function is:
-                        <br><br>
+                        
                         <img src="img/data15.png" class="img-responsive center-block space max_width" alt=""> 
 
                         <p>
@@ -203,12 +193,6 @@
                         Based on the plots discussed above and the statistical results, I decided to use 36 features for my model. The plot above shows a comparison between the ozone values predicted by a the new linear regression model, and the values measured by the reference instrument. The overall cross-validation RMSE is 4&thinsp;ppb, the high-value RMSE is 6&thinsp;ppb, and the difference in high-value medians is -1.9&thinsp;ppb.  
                         </p>
 
-                        <img src="img/data12.png" class="img-responsive center-block space max_width" alt="">
-                        <img src="img/data17.png" class="img-responsive center-block space max_width" alt="">
-                        <p>
-                        The histograms above show how well the distribution of the predicted data matches the reference data. 
-                        </p>
-
                         <img src="img/data7.png" class="img-responsive center-block space max_width" alt=""> 
                         <img src="img/data8.png" class="img-responsive center-block space max_width" alt=""> 
 
@@ -216,12 +200,38 @@
                         Another method for reducing variance is to reduce the number of features in a model (and/or the magnitude of their coefficients) using a shrinkage penalty. The plots above are visualizations that aid in the selection of the shrinkage parameter, lambda, for the <a class = "neutral" href="http://statweb.stanford.edu/~tibs/lasso/lasso.pdf">lasso</a> reduction method. The higher the value of lambda, the larger the penalty placed on high coefficient values. The top plot visualizes how the coefficients change as lambda is increased, and the bottom plot shows how the custom error function I defined varies with lambda. The optimal lambda value is the one that results in the lowest error. The overall cross-validation RMSE for the Lasso model is 5&thinsp;ppb, the high-value RMSE is 6&thinsp;ppb, and the difference in high-value medians is -3.7&thinsp;ppb. While these statistics are significantly better than the base model, they are not as good as the forward selection results.
                         </p>
 
+                        <img src="img/data21.png" class="img-responsive center-block space max_width" alt="">
+
+                        <p>
+                        Other methods used in this experiment include random forest regressions and support vector machines.The box plots above show the absolute difference in medians between the reference and pod ozone measurements for ambient ozone concentrations higher than 50 ppb. All of the methods shown above outperformed linear regressions with the base features. The box, labeled “Best (FS)” represents the outcomes of a linear regression with the best generated features, extracted using forward-stepwise selection. The “Best Overall” box represents the models determined to be the most accurate (best forward selection for 75% of pods and lasso for 25%). While switching 25% of the pods to the lasso model slightly increases the absolute median difference between the pod and reference measurements, it improved the RMSE for pods that had variance problems.
+                        </p>
+
                         <p>
                         The best results for the cross-validation data were obtained using a linear model with features selected using forward selection with a custom error function. In addition to cross-validation data, it is important to have a true holdout data set, which is not used to choose the best model. For the true holdout data, using the best model, the overall RMSE is 3&thinsp;ppb, the high-value RMSE is 4&thinsp;ppb, and the difference in high-value medians is -2.2&thinsp;ppb.
                         </p> 
 
+                        <img src="img/data20.png" class="img-responsive center-block space max_width" alt=""> 
+
                         <p>
-                        Other methods used in this experiment include random forest regressions and support vector machines. See my <a class = "neutral" href="https://github.com/balmandhunter/Regressions_machine_learning/blob/master/CAMP_calibrations.ipynb">GitHub</a> for more information.
+                        The slopegraph above shows how the difference between the medians of high-ozone values (> 50 ppb) measured by the reference instrument and the pods changes when the regression model is changed from linear with the base features (pod ozone sensor signal, temperature, relative humidity) to a linear model with the best created features.
+                        </p>
+
+                        <img src="img/data22.png" class="img-responsive center-block space max_width" alt=""> 
+
+                        <p>
+                        The figure above shows the high ozone-value RMSE for the base features and best features. The high ozone-value RMSE is reduced in 15 of the 16 pods. The median high ozone-value RMSE for the linear model with base features is 6 ppb, with a standard deviation of 3.7 ppb. The median and standard deviation of the RMSE values are reduced to 4 ppb and 1.1 ppb, respectively, when the best models are used. 
+                        </p>
+
+                        <img src="img/data23.png" class="img-responsive center-block space max_width" alt=""> 
+
+
+                        <p>
+                        The emphasis on improvements in the fit at high values did not lead to a less accurate model at lower values, as shown in the bar graph above. The change in model reduced the overall RMSE in 15 of the 16 pods. The median overall RMSE was reduced from 6 ppb to 5 ppb, and the standard deviation was reduced from 2.5 ppb to 1.6 ppb.
+                        </p>
+                        
+                        <p>
+                         See my <a class = "neutral" href="https://github.com/balmandhunter/Regressions_machine_learning/blob/master/CAMP_calibrations.ipynb">GitHub</a> for more information.
+                        </p>
 
                     </div>
 
