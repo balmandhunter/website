@@ -26,7 +26,7 @@
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -99,18 +99,18 @@
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-preview">
                             <p>
-                                Why am I a data junkie? Because I'm  excited about getting my hands on the vast reservoir of information that is waiting to be tapped. As scientists and engineers, we spend most of our time acquiring information through research and experimentation. Data science capitalizes on the opportunity to extract information from the mountains of data that have already been collected. 
+                                Why am I a data junkie? Because I'm  excited about getting my hands on the vast reservoir of information that is waiting to be tapped. As scientists and engineers, we spend most of our time acquiring information through research and experimentation. Data science capitalizes on the opportunity to extract information from the mountains of data that have already been collected.
                             </p>
                             <p>
-                                I've recently experienced this phenomenon in my work as a PhD candidate at the University of Colorado. My research group develops inexpensive air quality monitors using low-cost sensors, and lately, I've been exploring how machine learning can improve sensor performance. In  a few short months, I have been able to significantly improve the regression models that we use to calibrate our sensors, and therefore improve the accuracy of our measurements- all without spending any time improving instrument design or performing more experiments. 
+                                I've recently experienced this phenomenon in my work as a PhD candidate at the University of Colorado. My research group develops inexpensive air quality monitors using low-cost sensors, and lately, I've been exploring how machine learning can improve sensor performance. In  a few short months, I have been able to significantly improve the regression models that we use to calibrate our sensors, and therefore improve the accuracy of our measurements- all without spending any time improving instrument design or performing more experiments.
                             </p>
                             <p>
-                                The ability of data science to exponentially accelerate the pace of research is very exciting, and can be applied to almost any field. I am eager to explore the hidden possibilities of data, and push the boundaries of understanding. 
+                                The ability of data science to exponentially accelerate the pace of research is very exciting, and can be applied to almost any field. I am eager to explore the hidden possibilities of data, and push the boundaries of understanding.
                             </p>
                     </div>
 
                     <hr class = "big">
-                        <h2> Personal Work - Exploring the Spread of the Tour de France 
+                        <h2> Personal Work - Exploring the Spread of the Tour de France
                         </h2>
 
                         <p>
@@ -120,27 +120,71 @@
                         <a href="tdf/tour_de_france.html" class="portfolio-box" target="_blank">
                             <p>
                             I've been pretty obsessed with following the Tour de France this July, and I thought it would be fun to use D3 to create an interactive graphic that shows the how participation in the Tour has changed since inaugural event in 1903. I hope you enjoy exploring the graphic as much as I enjoyed developing it!
-                            </p> 
-                            <img src="img/data18.png" class="img-responsive center-block max_width" alt="">   
-                            
+                            </p>
+                            <img src="img/data18.png" class="img-responsive center-block max_width" alt="">
+
                         </a>
                         </div>
-                     
+
                     <hr class = "big">
 
+                    <p> I wanted to try using plotly, and found that it's a great tool that
+                    makes it very easy to create awesome visualizations! I checked out the World Health Organization's
+                    <a class ="neutral"
+                    href="http://www.who.int/gho/database/en/">Global Health Observatory data,</a>  and made
+                    this map of annual deaths per 100,000 people that can be attributed
+                    to poor indoor air quality. Millions of people cook and heat
+                    their homes by burning biomass indoors in unvented fireplaces, and
+                    the health consequences are dire. In the <a class =
+                    "neutral"
+                    href="http://hanniganlab.pbworks.com/w/page/62954897/Hannigan%20Research%20Group">Hannigan
+                    Lab</a>, we design low-cost air quality monitors, and one of the things we do with them is measure cookstove emissions in Ghana. You can read more about the awesome work my colleagues are doing in this <a class =
+                    "neutral"
+                    href="http://www.dailycamera.com/cu-news/ci_26020995/cu-boulder-ncar-awarded-1-5-million-epa">Daily Camera Article.</a>   </p>
 
-                     <h2> Personal Work - Playing with D3 (in progress...)
-                        </h2>
-                         <div id="chart3_d3" class="img-responsive center-block space max_width"></div>
 
-                       
-                    <hr class = "big">
- 
-                    <div class="post-preview">                            
+
+                 <!-- Plotly chart will be drawn inside this div -->
+                <div id="plotly-div"></div>
+                  <script>
+                   var data = [
+                     {
+                          z: ["93.2", "119.8", "1.2", "0", "86.3", "1.1", "3.3", "37.7", "0", "0", "25.9", "0", "0", "54.8", "1.4", "4.8", "0", "8.3", "79.0", "41.0", "32.3", "157.9", "28.6", "9.0", "0", "65.6", "83.1", "92.6", "77.5", "32.9", "60.3", "72.4", "0", "83.0", "106.4", "7.1", "108.7", "12.5", "62.3", "73.7", "5.6", "26.6", "16.1", "0", "1.8", "199.0", "95.1", "0", "18.9", "8.4", "10.9", "3.9", "1.6", "23.5", "82.2", "61.1", "32.2", "49.9", "59.5", "0", "0", "26.7", "60.5", "195.4", "0", "68.4", "0", "2.8", "33.4", "77.6", "92.4", "14.2", "97.1", "38.8", "47.8", "0", "99.0", "66.2", "1.0", "2.0", "0", "0", "0", "20.5", "0", "0.7", "36.7", "51.0", "46.9", "0", "70.4", "92.5", "27.9", "0.8", "63.1", "67.2", "0.7", "0", "0", "75.0", "63.1", "1.0", "7.8", "100.8", "0", "26.6", "48.5", "1.4", "11.7", "36.7", "0", "107.2", "72.8", "4.8", "58.9", "103.9", "39.1", "83.1", "0", "0", "47.7", "93.6", "76.4", "0", "0", "67.6", "0", "15.4", "40.4", "43.5", "21.7", "62.4", "0", "0", "0.2", "0.6", "53.6", "74.5", "13.1", "58.2", "0", "3.3", "5.5", "31.8", "0", "62.2", "0.7", "34.1", "110.4", "1.1", "129.2", "0", "2.6", "7.3", "53.0", "107.7", "20.3", "83.8", "0", "95.0", "52.6", "10.2", "53.6", "0", "0", "0.7", "62.8", "37.1", "76.5", "76.5", "70.7", "30.5", "1.3", "1.4", "8.9", "2.4", "20.3", "59.2", "21.1", "0.2", "0", "44.5", "0", "1.8", "30.0", "47.7", "0.6", "63.6", "37.7", "55.7", "45.3"],
+                          colorscale: [["0", "rgb(220, 220, 220)"], ["0.2", "rgb(245, 195, 157)"], ["0.4", "rgb(245, 160, 105)"], ["1", "rgb(178, 10, 28)"]],
+                          locationmode: "country names",
+                          locations: ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia (Plurinational State of)", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cote d'Ivoire", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Democratic People's Republic of Korea", "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran (Islamic Republic of)", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Lao People's Democratic Republic", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia (Federated States of)", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Republic of Korea", "Republic of Moldova", "Romania", "Russian Federation", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syrian Arab Republic", "Tajikistan", "Thailand", "The former Yugoslav republic of Macedonia", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom of Great Britain and Northern Ireland", "United Republic of Tanzania", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela (Bolivarian Republic of)", "Viet Nam", "Yemen", "Zambia", "Zimbabwe"],
+                          locationssrc: "berkeley:14:8b87dd",
+                          type: "choropleth",
+                          uid: "5a5320",
+                          zmax: 198.9997073,
+                          zmin: 0,
+                          zsrc: "berkeley:14:c04e46"
+                        }
+                      ];
+                      var layout = {
+                        autosize: true,
+                        height: 425,
+                        margin: {
+                      r: 90,
+                      t: 50,
+                      autoexpand: false,
+                      b: 0,
+                      l: 10
+                    },
+                        title: "Deaths per 100,000 Residents Attributable to Poor Indoor Air Quality",
+                        width: 750
+                      };
+                      Plotly.plot('plotly-div', data, layout);
+                   </script>
+
+                   <hr class = "big">
+
+
+                    <div class="post-preview">
                         <h2> Personal Work - Regression Modeling for Sensor Calibration
                         </h2>
 
- 
+
 
                         <p>
                             I have always valued explanatory data visualization, but the importance of exploratory data visualization has become more apparent to me as I have worked on improving the regression models we use for sensor calibrations. Check out my IPython notebook on <a class = "neutral" href="https://github.com/balmandhunter/Regressions_machine_learning/blob/master/CAMP_calibrations.ipynb">GitHub</a> to see all of the visualizations I used to guide my regression modeling decisions.
@@ -150,51 +194,79 @@
                             The plot above is a comparison between the ozone values predicted by a linear regression model, using the data from the low-cost sensors, and the ozone values measured by a reference instrument. The cross-validation root-mean-square error (RMSE) for this model is 6&thinsp;ppb, which means that the mean difference  between the reference ozone concentration measurements and the model predictions is 6&thinsp;ppb.  This RMSE is very good, especially when you consider the fact that we're comparing the performance of a $10 sensor to a $10,000+ reference instrument. However, when you look at this plot, you can see that at high ozone values (>&thinsp;60&thinsp;ppb), the model underpredicts ozone by an average of 10.4 ppb, with an RMSE of 11&thinsp;ppb. Since exposure to high ozone concentrations can negatively impact health, researchers are most concerned about these high ozone values, and it is critical to measure them accurately. Without plotting this data, one could conclude that this model is a great fit, but this plot instantly makes it clear that it does not work well at high values.
                         </p>
 
-                        <img src="img/data10.png" class="img-responsive center-block space max_width" alt="">
-                        <img src="img/data9.png" class="img-responsive center-block space max_width" alt="">
+                        <img src="img/data10.png" class="img-responsive
+                        center-block space max_width" alt=""> <img
+                        src="img/data9.png" class="img-responsive center-block
+                        space max_width" alt="">
+                        <p> You can observe the
+                        distribution of the predicted and reference data above.
+                        The blue lines represent how the data would look if it
+                        were perfectly normally distributed, and looking at the
+                        actual data distribution in the bins shows us that the
+                        data is close to normally distributed. The top plot
+                        represents the distribution of the reference data. There
+                        is an abrupt cutoff at a concentration of zero, since
+                        ozone concentration cannot be less than zero. Notice
+                        that when the ozone concentration is above
+                        50&thinsp;ppb, the bins match the normal distribution
+                        very closely. The ozone concentration predictions in
+                        bottom plot, on the other hand, abruptly drop off around
+                        60&thinsp;ppb, and there are no predicted concentrations
+                        above 65&thinsp;ppb. </p>
+
+                        <img src="img/data4.png" class="img-responsive
+                        center-block space max_width" alt="">
+
+                        <p> To reduce the
+                        model's underprediction at high values, I transformed
+                        the base features (ozone sensor signal, temperature and
+                        humidity) to create 321 new features. The plot above
+                        shows a linear regression with all 324 features. Adding
+                        the new features to the regression reduced the magnitude
+                        of the underprediction from at high values to
+                        2.6&thinsp;ppb, and the high-ozone cross-validation RMSE
+                        decreased slightly to 10&thinsp;ppb. As expected when
+                        adding a large number of features, the variance
+                        increased, and the overall RMSE increased from
+                        6&thinsp;ppb to 7&thinsp;ppb. Since it is always best to
+                        use the simplest model that produces good results, the
+                        next step is to try to simplify the model. Reducing the
+                        number of features in a model is also one way to reduce
+                        variance in the model. </p>
+
+                        <p> I used forward selection to reduce the number of
+                        features in the model. I wrote an algorithm that chooses
+                        each feature based on minimizing a custom error
+                        function. The custom function is: <br><br> </p>
+
+                        <img src="img/data15.png" class="img-responsive center-block space max_width" alt="">
+
                         <p>
-                            You can observe the distribution of the predicted and reference data above. The blue lines represent how the data would look if it were perfectly normally distributed, and looking at the actual data distribution in the bins shows us that the data is close to normally distributed. The top plot represents the distribution of the reference data. There is an abrupt cutoff at a concentration of zero, since ozone concentration cannot be less than zero. Notice that when the ozone concentration is above 50&thinsp;ppb, the bins match the normal distribution very closely. 
-                            The ozone concentration predictions in bottom plot, on the other hand, abruptly drop off around 60&thinsp;ppb, and there are no predicted concentrations above 65&thinsp;ppb. 
+                        where C<sub>m,r</sub> is the median of the reference ozone data when the ozone concentration is <br>>&thinsp;60&thinsp;ppb, C<sub>m,p</sub> is the median of the predicted ozone data for high reference ozone, MSE<sub>h</sub> is the MSE at high ozone values, and MSE<sub>l</sub> is the MSE at low ozone values.
+                        </p>
+                        <img src="img/data1.png" class="img-responsive center-block space max_width" alt="">
+                        <img src="img/data13.png" class="img-responsive center-block space max_width" alt="">
+                        <p>
+                         The plots above show how the custom error and RMSE change as each next-best feature is added to the regression. The top plot shows the 100 best features, and the bottom plot is zoomed in on the area in the red circle. Based on this data, I will likely select between 33 and 37 features for the model, since both the custom score and overall RMSE are low in this region. In addition to looking at the plots above, I looked at learning curves to evaluate when adding features starts to lead to overfitting.
                         </p>
 
-                        <img src="img/data4.png" class="img-responsive center-block space max_width" alt=""> 
-                        <p>
-                            To reduce the model's underprediction at high values, I transformed the base features (ozone sensor signal, temperature and humidity) to create 321 new features. The plot above shows a linear regression with all 324 features. Adding the new features to the regression reduced the magnitude of the underprediction from at high values to 2.6&thinsp;ppb, and the high-ozone cross-validation RMSE decreased slightly to 10&thinsp;ppb. As expected when adding a large number of features, the variance increased, and the overall RMSE increased from 6&thinsp;ppb to 7&thinsp;ppb. Since it is always best to use the simplest model that produces good results, the next step is to try to simplify the model. Reducing the number of features in a model is also one way to reduce variance in the model. 
-                        </p>
-
-                        <p>
-                            I used forward selection to reduce the number of features in the model. I wrote an algorithm that chooses each feature based on minimizing a custom error function. The custom function is:
-                            <br><br>
-                        </p>
-                        
-                        <img src="img/data15.png" class="img-responsive center-block space max_width" alt=""> 
-
-                        <p>
-                        where C<sub>m,r</sub> is the median of the reference ozone data when the ozone concentration is <br>>&thinsp;60&thinsp;ppb, C<sub>m,p</sub> is the median of the predicted ozone data for high reference ozone, MSE<sub>h</sub> is the MSE at high ozone values, and MSE<sub>l</sub> is the MSE at low ozone values. 
-                        </p>
-                        <img src="img/data1.png" class="img-responsive center-block space max_width" alt=""> 
-                        <img src="img/data13.png" class="img-responsive center-block space max_width" alt=""> 
-                        <p>
-                         The plots above show how the custom error and RMSE change as each next-best feature is added to the regression. The top plot shows the 100 best features, and the bottom plot is zoomed in on the area in the red circle. Based on this data, I will likely select between 33 and 37 features for the model, since both the custom score and overall RMSE are low in this region. In addition to looking at the plots above, I looked at learning curves to evaluate when adding features starts to lead to overfitting. 
-                        </p>
-
-                        <img src="img/data5.png" class="img-responsive center-block space max_width" alt=""> 
+                        <img src="img/data5.png" class="img-responsive center-block space max_width" alt="">
                         <p>
                         Learning curves visualize how error for a cross-validation set and training set change as the number of training samples increases. When a fit has high bias, the training and cross-validation error converge at high error values. When a fit has high variance, as the number of samples increases, the gap between the training error and cross-validation error remains large. The plot above is a learning curve for a fit that includes all 324 features. You can see that there is a large difference between the training and cross-validation error, which is a sign of high variance.
                         </p>
 
-                        <img src="img/data6.png" class="img-responsive center-block space max_width" alt=""> 
+                        <img src="img/data6.png" class="img-responsive center-block space max_width" alt="">
                         <p>
-                        I plotted a learning curve for each feature that I added to the model. By looking through the curves, and seeing how they change with each feature, you can tell if and when adding more features leads to overfitting. The learning curve above is for the maximum number of features I'm considering (37). The training and cross-validation lines are close together, so the model does not have a variance problem, and including up to 37 features in the model should not lead to overfitting. See my IPython notebook on <a class = "neutral" href="https://github.com/balmandhunter/Regressions_machine_learning/blob/master/CAMP_calibrations.ipynb">GitHub</a> to view the learning curves for the best 100 features. 
+                        I plotted a learning curve for each feature that I added to the model. By looking through the curves, and seeing how they change with each feature, you can tell if and when adding more features leads to overfitting. The learning curve above is for the maximum number of features I'm considering (37). The training and cross-validation lines are close together, so the model does not have a variance problem, and including up to 37 features in the model should not lead to overfitting. See my IPython notebook on <a class = "neutral" href="https://github.com/balmandhunter/Regressions_machine_learning/blob/master/CAMP_calibrations.ipynb">GitHub</a> to view the learning curves for the best 100 features.
                         </p>
 
-                        <img src="img/data16.png" class="img-responsive center-block space max_width" alt=""> 
+                        <img src="img/data16.png" class="img-responsive center-block space max_width" alt="">
                         <p>
-                        Based on the plots discussed above and the statistical results, I decided to use 36 features for my model. The plot above shows a comparison between the ozone values predicted by a the new linear regression model, and the values measured by the reference instrument. The overall cross-validation RMSE is 4&thinsp;ppb, the high-value RMSE is 6&thinsp;ppb, and the difference in high-value medians is -1.9&thinsp;ppb.  
+                        Based on the plots discussed above and the statistical results, I decided to use 36 features for my model. The plot above shows a comparison between the ozone values predicted by a the new linear regression model, and the values measured by the reference instrument. The overall cross-validation RMSE is 4&thinsp;ppb, the high-value RMSE is 6&thinsp;ppb, and the difference in high-value medians is -1.9&thinsp;ppb.
                         </p>
 
-                        <img src="img/data7.png" class="img-responsive center-block space max_width" alt=""> 
-                        <img src="img/data8.png" class="img-responsive center-block space max_width" alt=""> 
+                        <img src="img/data7.png" class="img-responsive center-block space max_width" alt="">
+                        <img src="img/data8.png" class="img-responsive center-block space max_width" alt="">
 
                         <p>
                         Another method for reducing variance is to reduce the number of features in a model (and/or the magnitude of their coefficients) using a shrinkage penalty. The plots above are visualizations that aid in the selection of the shrinkage parameter, lambda, for the <a class = "neutral" href="http://statweb.stanford.edu/~tibs/lasso/lasso.pdf">lasso</a> reduction method. The higher the value of lambda, the larger the penalty placed on high coefficient values. The top plot visualizes how the coefficients change as lambda is increased, and the bottom plot shows how the custom error function I defined varies with lambda. The optimal lambda value is the one that results in the lowest error. The overall cross-validation RMSE for the Lasso model is 5&thinsp;ppb, the high-value RMSE is 6&thinsp;ppb, and the difference in high-value medians is -3.7&thinsp;ppb. While these statistics are significantly better than the base model, they are not as good as the forward selection results.
@@ -208,27 +280,27 @@
 
                         <p>
                         The best results for the cross-validation data were obtained using a linear model with features selected using forward selection with a custom error function. In addition to cross-validation data, it is important to have a true holdout data set, which is not used to choose the best model. For the true holdout data, using the best model, the overall RMSE is 3&thinsp;ppb, the high-value RMSE is 4&thinsp;ppb, and the difference in high-value medians is -2.2&thinsp;ppb.
-                        </p> 
+                        </p>
 
-                        <img src="img/data20.png" class="img-responsive center-block space max_width" alt=""> 
+                        <img src="img/data20.png" class="img-responsive center-block space max_width" alt="">
 
                         <p>
                         The slopegraph above shows how the difference between the medians of high-ozone values (> 50 ppb) measured by the reference instrument and the pods changes when the regression model is changed from linear with the base features (pod ozone sensor signal, temperature, relative humidity) to a linear model with the best created features.
                         </p>
 
-                        <img src="img/data22.png" class="img-responsive center-block space max_width" alt=""> 
+                        <img src="img/data22.png" class="img-responsive center-block space max_width" alt="">
 
                         <p>
-                        The figure above shows the high ozone-value RMSE for the base features and best features. The high ozone-value RMSE is reduced in 15 of the 16 pods. The median high ozone-value RMSE for the linear model with base features is 6 ppb, with a standard deviation of 3.7 ppb. The median and standard deviation of the RMSE values are reduced to 4 ppb and 1.1 ppb, respectively, when the best models are used. 
+                        The figure above shows the high ozone-value RMSE for the base features and best features. The high ozone-value RMSE is reduced in 15 of the 16 pods. The median high ozone-value RMSE for the linear model with base features is 6 ppb, with a standard deviation of 3.7 ppb. The median and standard deviation of the RMSE values are reduced to 4 ppb and 1.1 ppb, respectively, when the best models are used.
                         </p>
 
-                        <img src="img/data23.png" class="img-responsive center-block space max_width" alt=""> 
+                        <img src="img/data23.png" class="img-responsive center-block space max_width" alt="">
 
 
                         <p>
                         The emphasis on improvements in the fit at high values did not lead to a less accurate model at lower values, as shown in the bar graph above. The change in model reduced the overall RMSE in 15 of the 16 pods. The median overall RMSE was reduced from 6 ppb to 5 ppb, and the standard deviation was reduced from 2.5 ppb to 1.6 ppb.
                         </p>
-                        
+
                         <p>
                          See my <a class = "neutral" href="https://github.com/balmandhunter/Regressions_machine_learning/blob/master/CAMP_calibrations.ipynb">GitHub</a> for more information.
                         </p>
@@ -237,19 +309,19 @@
 
 
                     <hr class = "big">
-                     
+
                     <div class="post-preview">
                         <a href="http://www.bbc.co.uk/programmes/p00cgkfk">
-                            
-                        <h2> "Hans Rosling's 200 countries, 200 years, 4 minutes" 
-                        </h2> 
+
+                        <h2> "Hans Rosling's 200 countries, 200 years, 4 minutes"
+                        </h2>
                         <p class = "gray">
                         (source: BBC)
                         </p>
                         <p>
-                            Hans Rosling's augmented reality data visualizations are absolutely incredible. 
+                            Hans Rosling's augmented reality data visualizations are absolutely incredible.
                          </p>
-                            <div class="embed-responsive embed-responsive-16by9 center-block max_width">  
+                            <div class="embed-responsive embed-responsive-16by9 center-block max_width">
                             <iframe width="640" height="360" src="https://www.youtube.com/embed/jbkSRLYSojo?rel=0" frameborder="0" allowfullscreen></iframe>
                             </div>
 
@@ -257,7 +329,7 @@
                             <p>
                             "Hans Rosling's famous lectures combine enormous quantities of public data with a sport's commentator's style to reveal the story of the world's past, present and future development. Now he explores stats in a way he has never done before - using augmented reality animation. In this spectacular section of 'The Joy of Stats' he tells the story of the world in 200 countries over 200 years using 120,000 numbers - in just four minutes. Plotting life expectancy against income for every country since 1810, Hans shows how the world we live in is radically different from the world most of us imagine."
                             [click for more information]
-                            </p>    
+                            </p>
 
                         </a>
                     </div>
@@ -270,23 +342,23 @@
                             </h3>
                             <p class = "gray">
                                (source: R2D3)
-                            </p>  
-                            <img src="img/interesting1.png" class="img-responsive center-block max_width" alt="">   
+                            </p>
+                            <img src="img/interesting1.png" class="img-responsive center-block max_width" alt="">
                             <p>
                             "In machine learning, computers apply statistical learning techniques to automatically identify patterns in data. These techniques can be used to make highly accurate predictions.
 
                             Using a data set about homes, we will create a machine learning model to distinguish homes in New York from homes in San Francisco...."
                             [click to continue reading]
-                            </p>            
+                            </p>
                         </a>
                     </div>
                     <hr class = "big">
 
                     <div class="post-preview">
                         <a href="http://technology.stitchfix.com/blog/2015/01/20/eda-and-graphics/">
-                            
-                        <h2> "Exploratory Data Analysis and Graphics" 
-                        </h2> 
+
+                        <h2> "Exploratory Data Analysis and Graphics"
+                        </h2>
                         <p class = "gray">
                         (source: Stitch Fix Technology Blog)
                         </p>
@@ -294,31 +366,31 @@
                             I'm intrigued by data visualization. I believe that superb visualizations represent an intersection between art, science and education. The article, below, explains how even simple data visualizations can provide a wealth of information:
                          </p>
 
-                            <img src="img/data_vis.png" class="img-responsive center-block max_width" alt=""> 
+                            <img src="img/data_vis.png" class="img-responsive center-block max_width" alt="">
 
                             <p>
                             "In data science, or any related quantitative field, we strive to understand and leverage our data for our objectives. These data will usually be part of a bigger project that we’re working on where the work flow looks something like the following..."
                             [click to continue reading]
-                            </p>    
+                            </p>
 
                         </a>
                     </div>
                     <hr class = "big">
                     <div class="post-preview">
-                        <a href="http://fivethirtyeight.com/interactives/flights/"> 
+                        <a href="http://fivethirtyeight.com/interactives/flights/">
                             <h2> "Which Flight Will Get You There Fastest?"
                             </h2>
                             <p class="gray">
                                (source: FiveThirtyEight)
-                            </p> 
+                            </p>
                             <p>
                             Nate Silver made statistics cool during the 2008 elections. What more needs to be said?
-                            </p> 
-                            <img src="img/flights.jpg" class="img-responsive center-block max_width" alt="">   
+                            </p>
+                            <img src="img/flights.jpg" class="img-responsive center-block max_width" alt="">
                             <p>
                             "FiveThirtyEight analyzed 6 million flights to figure out which airports, airlines and routes are most likely to get you there on time and which ones will leave you waiting..."
                             [click to continue reading]
-                            </p>            
+                            </p>
                         </a>
                     </div>
                     <hr class = "big">
@@ -328,13 +400,13 @@
                             </h3>
                             <p class = "gray">
                                (source: FiveThirtyEight)
-                            </p>  
-                            <img src="img/tax_marriage.png" class="img-responsive center-block max_width" alt="">   
+                            </p>
+                            <img src="img/tax_marriage.png" class="img-responsive center-block max_width" alt="">
                             <p>
                             "I was super excited about doing my taxes this year. I got married last June and couldn’t wait to exercise that most glorious privilege of matrimony — the ability to file jointly.
 
                             But after my wife and I filled out our tax return, I wondered … did we actually save any money, or did we, like an estimated 38 percent of couples, end up having to pay more because of our new legal status?..."[click to continue reading]
-                            </p>            
+                            </p>
                         </a>
                     </div>
                     <hr class = "big">
@@ -344,15 +416,15 @@
                             </h3>
                             <p class = "gray">
                                (source: New York Times)
-                            </p>  
+                            </p>
                             <p>
-                                I have a confession to make. I have a massive visualization crush on the data team at the New York Times. They somehow manage to repeatedly produce interactive data visualizations that are engaging, relevant, pragmatic, and beautiful. I aspire to create such masterpieces during my career. 
-                            </p> 
-                            <img src="img/born_in_CA.png" class="img-responsive center-block max_width" alt="">   
+                                I have a confession to make. I have a massive visualization crush on the data team at the New York Times. They somehow manage to repeatedly produce interactive data visualizations that are engaging, relevant, pragmatic, and beautiful. I aspire to create such masterpieces during my career.
+                            </p>
+                            <img src="img/born_in_CA.png" class="img-responsive center-block max_width" alt="">
                             <p>
                             "Foreign immigration is a hot topic these days, but the movement of people from one state to another can have an even bigger influence on the United States’ economy, politics and culture. Americans have already seen this with the Western expansion, the movement of Southern blacks to Northern cities and the migration from the Rust Belt..."
                             [click to continue reading]
-                            </p>            
+                            </p>
                         </a>
                     </div>
                     <hr class = "big">
@@ -362,12 +434,12 @@
                             </h3>
                             <p class = "gray">
                                (source: New York Times)
-                            </p>  
-                            <img src="img/home_price.png" class="img-responsive center-block max_width" alt="">   
+                            </p>
+                            <img src="img/home_price.png" class="img-responsive center-block max_width" alt="">
                             <p>
                             "The choice between buying a home and renting one is among the biggest financial decisions that many adults make. But the costs of buying are more varied and complicated than for renting, making it hard to tell which is a better deal. To help you answer this question, our calculator takes the most important costs associated with buying a house and computes the equivalent monthly rent..."
                             [click to continue reading]
-                            </p>            
+                            </p>
                         </a>
                     </div>
 
